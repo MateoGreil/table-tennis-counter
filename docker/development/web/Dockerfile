@@ -1,9 +1,9 @@
 FROM ruby:latest
 
-COPY Gemfile Gemfile.lock /app/
+# COPY Gemfile Gemfile.lock /app/
 
 WORKDIR /app
 
-RUN bundle install
+# RUN bundle install
 
 VOLUME /usr/local/bundle
