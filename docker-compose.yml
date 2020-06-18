@@ -14,10 +14,10 @@ services:
       - web_bundle:/usr/local/bundle
     depends_on:
       - psql
-    # entrypoint:
-    #   - bash
-    #   - -c
-    #   - rm -f /app/tmp/pids/server.pid && bundle install && rails s
+    entrypoint:
+      - bash
+      - -c
+      - rm -f /app/tmp/pids/server.pid && bundle install && rails s
   psql:
     build:
       context: .
