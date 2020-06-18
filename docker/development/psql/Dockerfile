@@ -1,5 +1,5 @@
-FROM postgres:latest
+FROM library/postgres:latest
 
+ENV POSTGRES_PASSWORD ccoollepingpong
 ENV POSTGRES_USER pingpong
-ENV POSTGRES_PASSWORD totolasticot
 ENV POSTGRES_DB pingpong_development

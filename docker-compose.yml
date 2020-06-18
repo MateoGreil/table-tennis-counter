@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/development/web/Dockerfile
-    environment:
-      - EUKARYOTAPI_DATABASE_PASSWORD=totolasticot
     ports:
       - 3000:3000
     volumes:
@@ -17,17 +15,12 @@ services:
     entrypoint:
       - bash
       - -c
-      - rm -f /app/tmp/pids/server.pid && bundle install && rails s
+      - rm -f /app/tmp/pids/server.pid && bundle install && rails s -b 0.0.0.0
   psql:
     build:
       context: .
       dockerfile: ./docker/development/psql/Dockerfile
-    environment:
-      - POSTGRES_PASSWORD=totolasticot
-      - POSTGRES_USER=eukaryotapi
-      - POSTGRES_DB=eukaryotapi_development
     volumes:
-      - .:/app
       - psql_data:/var/lib/postgresql/data
 volumes:
   psql_data:
