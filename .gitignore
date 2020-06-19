@@ -29,3 +29,10 @@
 # Ignore psql and bundle save file
 psql_data
 api_bundle
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
