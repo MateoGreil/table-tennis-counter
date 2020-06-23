@@ -17,11 +17,11 @@ services:
       - -c
       - rm -f /app/tmp/pids/server.pid && yarn install --check-files && bundle install && rails s -b 0.0.0.0
   psql:
-    build:
-      context: ./docker/development/psql
-      dockerfile: Dockerfile
-    volumes:
-      - psql_data:/var/lib/postgresql/data
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+    # volumes:
+    #   - psql_data:/var/lib/postgresql/data
 volumes:
   psql_data:
   web_bundle:

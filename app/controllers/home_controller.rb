@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!
   
   def index
     @matchs = Match.joins(:users).where('users.id = ?', current_user.id)
