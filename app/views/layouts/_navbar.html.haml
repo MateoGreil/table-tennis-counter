@@ -7,6 +7,12 @@
       %li.nav-item
         %a.nav-link{:href => users_path} Users
       %li.nav-item.dropdown
+        %a#teamsDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :role => "button"}
+          Teams
+        .dropdown-menu{"aria-labelledby" => "teamsDropdown"}
+          %a.dropdown-item{:href => teams_path} Index
+          %a.dropdown-item{:href => new_team_path} Create
+      %li.nav-item.dropdown
         %a#gamesDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :role => "button"}
           Games
         .dropdown-menu{"aria-labelledby" => "gamesDropdown"}

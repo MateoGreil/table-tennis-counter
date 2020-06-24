@@ -1,7 +1,10 @@
-class Team < ApplicationRecord
-  enum status: %i[looser winner in_progress]
-  belongs_to :teamable, polymorphic: true
+# frozen_string_literal: true
 
+# == Table: teams
+#
+# created_at              :datetime
+# updated_at              :datetime
+class Team < ApplicationRecord
   has_many :team_users, dependent: :destroy
   has_many :users, through: :team_users
 

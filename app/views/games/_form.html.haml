@@ -1,13 +1,9 @@
 = simple_form_for resource do |f|
-
-  - resource.errors[:teams].each do |error_teams| 
-    = error_teams
-
   = f.input :rule, as: :select, collection: Game.rules.keys.to_a
-
   %center.h3 Teams
   #teams.row
-    = f.simple_fields_for :teams do |team|
-      .col-sm.card.m-3= render 'team_fields', f: team
-
+    = f.simple_fields_for :t_one do |team_form|
+      .col-sm.card.m-3= render 'team_fields', f: team_form
+    = f.simple_fields_for :t_two do |team_form|
+      .col-sm.card.m-3= render 'team_fields', f: team_form
   = f.submit
