@@ -10,18 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_18_092840) do
+ActiveRecord::Schema.define(version: 2020_06_24_174510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
     t.bigint "match_id"
-    t.bigint "winner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "rule"
     t.index ["match_id"], name: "index_games_on_match_id"
-    t.index ["winner_id"], name: "index_games_on_winner_id"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -45,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_06_18_092840) do
     t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status"
     t.index ["game_id"], name: "index_teams_on_game_id"
   end
 
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2020_06_18_092840) do
     t.integer "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "login"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -76,7 +77,6 @@ ActiveRecord::Schema.define(version: 2020_06_18_092840) do
   end
 
   add_foreign_key "games", "matches"
-  add_foreign_key "games", "users", column: "winner_id"
   add_foreign_key "matches", "users", column: "winner_id"
   add_foreign_key "team_users", "teams"
   add_foreign_key "team_users", "users"

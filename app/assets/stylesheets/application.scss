@@ -14,3 +14,9 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
+th.winner {
+	background-color: green;
+}
+th.looser {
+	background-color: red;
+}

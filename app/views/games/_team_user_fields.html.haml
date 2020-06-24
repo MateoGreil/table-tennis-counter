@@ -1,0 +1,4 @@
+.nested-fields
+  = f.hidden_field :_destroy
+  = f.association :user, label_method: :login
+  = link_to :remove, '', class: 'remove_fields'

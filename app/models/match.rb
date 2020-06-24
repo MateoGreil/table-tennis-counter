@@ -1,5 +1,5 @@
 class Match < ApplicationRecord
-  has_one :game
-  has_many :teams, through: :game
-  has_many :users, through: :game
+  has_many :games
+  has_many :teams, through: :games
+  has_many :users, through: :games
 end

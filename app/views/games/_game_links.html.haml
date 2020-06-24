@@ -1,0 +1,6 @@
+.dropdown
+  .dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+  .dropdown-menu{"aria-labelledby" => "dropdownMenuButton"}
+    = link_to 'Delete', {controller: :games, action: :destroy, id: game.id}, method: :delete, class: 'dropdown-item'
+    %a.dropdown-item{href: edit_game_path(game)} Edit
+

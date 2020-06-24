@@ -20,8 +20,8 @@ services:
     image: postgres
     environment:
       POSTGRES_PASSWORD: password
-    # volumes:
-    #   - psql_data:/var/lib/postgresql/data
+    volumes:
+      - psql_data:/var/lib/postgresql/data
 volumes:
   psql_data:
   web_bundle:
