@@ -15,10 +15,9 @@ class GamesController < InheritedResources::Base
     params.require(:game).permit(
       :rule,
       teams_attributes: [
-        team_users_attributes: [
-          :user_id,
-          :_destroy
-        ]
+        :id,
+        :score,
+        team_users_attributes: %i[id user_id _destroy]
       ]
     )
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_174510) do
+ActiveRecord::Schema.define(version: 2020_06_24_220704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_174510) do
     t.bigint "winner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "rule"
     t.index ["winner_id"], name: "index_matches_on_winner_id"
   end
 
@@ -40,12 +41,13 @@ ActiveRecord::Schema.define(version: 2020_06_24_174510) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.bigint "game_id", null: false
+    t.string "teamable_type", null: false
+    t.bigint "teamable_id", null: false
     t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status"
-    t.index ["game_id"], name: "index_teams_on_game_id"
+    t.index ["teamable_type", "teamable_id"], name: "index_teams_on_teamable_type_and_teamable_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_174510) do
     t.string "login"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["login"], name: "index_users_on_login", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
@@ -80,5 +83,4 @@ ActiveRecord::Schema.define(version: 2020_06_24_174510) do
   add_foreign_key "matches", "users", column: "winner_id"
   add_foreign_key "team_users", "teams"
   add_foreign_key "team_users", "users"
-  add_foreign_key "teams", "games"
 end
