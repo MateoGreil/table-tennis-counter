@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 2020_06_24_222323) do
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.bigint "match_id"
     t.boolean "winner"
+    t.bigint "match_id"
     t.bigint "t_one_id"
     t.bigint "t_two_id"
-    t.integer "t_one_score"
-    t.integer "t_two_score"
+    t.integer "t_one_score", default: 0
+    t.integer "t_two_score", default: 0
     t.integer "rule", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2020_06_24_222323) do
     t.boolean "winner"
     t.bigint "t_one_id"
     t.bigint "t_two_id"
-    t.integer "t_one_score"
-    t.integer "t_two_score"
+    t.integer "t_one_score", default: 0
+    t.integer "t_two_score", default: 0
     t.integer "rule", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 2020_06_24_222323) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

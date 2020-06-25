@@ -1,0 +1,7 @@
+.dropdown
+  .dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+  .dropdown-menu{"aria-labelledby" => "dropdownMenuButton"}
+    = link_to 'Show', match_path(match), class: 'dropdown-item'
+    = link_to 'Delete', {controller: :matches, action: :destroy, id: match.id}, method: :delete, class: 'dropdown-item'
+    %a.dropdown-item{href: edit_match_path(match)} Edit
+

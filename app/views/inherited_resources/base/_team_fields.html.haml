@@ -1,5 +1,4 @@
-.nested_fields.card-body
-  = f.input :score, input_html: { min: 0, max: 21 }
+.card-body
   = f.simple_fields_for :team_users do |team_user_form|
     = render 'team_user_fields', f: team_user_form
   .links

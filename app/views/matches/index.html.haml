@@ -1,0 +1,20 @@
+%table.table
+  %thead.thead-light
+    %tr
+      %th{:scope => "col"}
+      %th{:scope => "col"} Rule
+      %th{:scope => "col"} Team 1
+      %th{:scope => "col"} Score 1
+      %th{:scope => "col"} Score 2
+      %th{:scope => "col"} Team 2
+      %th Created at
+  %tbody
+    - collection.each do |match|
+      %tr
+        %th= render 'match_links', match: match
+        %th= match.rule
+        %th{class: match.t_one_status}= match.t_one.users.pluck(:login).join(' & ')
+        %th{class: match.t_one_status}= match.t_one_score 
+        %th{class: match.t_two_status}= match.t_two_score 
+        %th{class: match.t_two_status}= match.t_two.users.pluck(:login).join(' & ') 
+        %th= match.created_at
