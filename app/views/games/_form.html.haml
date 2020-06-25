@@ -7,5 +7,9 @@
     = f.simple_fields_for :t_two, resource.t_two do |team_form|
       .col-sm.card.m-3= render 'team_fields', f: team_form
   %center.h3 Score
-  = render 'game_fields', f: f
+  #score.row
+    .col-sm.card.m-3
+      .card-body= f.input :t_one_score
+    .col-sm.card.m-3
+      .card-body= f.input :t_two_score
   = f.submit

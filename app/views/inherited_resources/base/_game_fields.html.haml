@@ -1,5 +1,8 @@
-#score.row
-  .col-sm.card.m-3
-    .card-body= f.input :t_one_score
-  .col-sm.card.m-3
-    .card-body= f.input :t_two_score
+.nested-fields
+  = f.hidden_field :_destroy
+  #score.row
+    .col-sm.card.m-3
+      .card-body= f.input :t_one_score
+    .col-sm.card.m-3
+      .card-body= f.input :t_two_score
+  = link_to :remove, '', class: 'remove_fields'

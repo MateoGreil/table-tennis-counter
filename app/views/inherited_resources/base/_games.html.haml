@@ -7,6 +7,7 @@
       %th{:scope => "col"} Score 1
       %th{:scope => "col"} Score 2
       %th{:scope => "col"} Team 2
+      %th Match
       %th Created at
   %tbody
     - games.each do |game|
@@ -17,4 +18,5 @@
         %th{class: game.t_one_status}= game.t_one_score 
         %th{class: game.t_two_status}= game.t_two_score 
         %th{class: game.t_two_status}= game.t_two.users.pluck(:login).join(' & ') 
+        %th= link_to game.match.id, match_path(game.match) if game.match
         %th= game.created_at
