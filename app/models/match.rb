@@ -23,23 +23,29 @@ class Match < ApplicationRecord
 
   before_save :set_winner
   before_validation :set_games_attributes
-  before_save :set_score
-  after_touch -> { set_score && save }
-  
+  after_touch -> { set_winner; save }
+
   attr_accessor :games_rule
 
+  # validate :too_much_games?
+
+  # def too_much_games?
+  #   errors.add(:games, :too_much_games) if games.length > rule.to_i && games.first(rule.to_i).
+  # end
+
   def set_winner
-    self.winner = if games.length < rule.to_i
-                    nil
-                  elsif games.where(winner: false).length >
-                        games.where(winner: true).length
+    set_score
+    self.winner = if t_one_score > t_two_score &&
+                     t_one_score + t_two_score - rule.to_i < t_one_score
                     false
-                  else
+                  elsif t_two_score > t_one_score &&
+                        t_two_score + t_one_score - rule.to_i < t_two_score
                     true
                   end
   end
 
   def set_score
+    # raise
     self.t_one_score = games.where(winner: false).length
     self.t_two_score = games.where(winner: true).length
   end
