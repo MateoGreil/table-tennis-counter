@@ -1,7 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  match: one
+  first_team: one
+  second_team: one
 
 two:
-  match: two
+  first_team: two
+  second_team: two
