@@ -2,14 +2,6 @@
   = f.input :rule, as: :select, collection: Game.rules.keys.to_a
   %center.h3 Teams
   #teams.row
-    = f.simple_fields_for :t_one, resource.t_one do |team_form|
-      .col-sm.card.m-3= render 'team_fields', f: team_form
-    = f.simple_fields_for :t_two, resource.t_two do |team_form|
-      .col-sm.card.m-3= render 'team_fields', f: team_form
-  %center.h3 Score
-  #score.row
-    .col-sm.card.m-3
-      .card-body= f.input :t_one_score
-    .col-sm.card.m-3
-      .card-body= f.input :t_two_score
+    = f.simple_fields_for :team_teamables do |tt_form|
+      .col-sm.card.m-3= render 'team_teamable_fields', f: tt_form
   = f.submit

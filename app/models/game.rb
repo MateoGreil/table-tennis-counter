@@ -7,37 +7,26 @@ class Game < ApplicationRecord
 
   belongs_to :match, optional: true, touch: true
 
-  belongs_to :t_one, class_name: 'Team'
-  belongs_to :t_two, class_name: 'Team'
-  has_many :users, through: %i[t_one t_two]
+  has_many :team_teamables, as: :teamable, dependent: :destroy
+  has_many :teams, through: :team_teamables
+  has_many :users, through: :teams
 
-  accepts_nested_attributes_for :t_one, :t_two
+  accepts_nested_attributes_for :team_teamables
 
   validates :rule, presence: true
+  validates :team_teamables, presence: true
 
-  before_save :set_winner
-
-  def t_one_status
-    return :winner if winner == false
-
-    return :looser if winner == true
-  end
-
-  def t_two_status
-    return :winner if winner == true
-
-    return :looser if winner == false
-  end
+  after_save :set_winner
 
   private
 
   def set_winner
-    self.winner = if t_one_score >= rule.to_i &&
-                     t_one_score - 2 >= t_two_score
-                    false
-                  elsif t_two_score >= rule.to_i &&
-                        t_two_score - 2 >= t_one_score
-                    true
-                  end
+    looser = team_teamables.order(:score).first
+    winner = team_teamables.order(:score).last
+    return unless winner.score >= rule.to_i && looser.score + 2 <= winner.score
+
+    winner.update(status: :winner)
+    looser.update(status: :looser)
   end
+
 end

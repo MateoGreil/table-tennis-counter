@@ -16,13 +16,12 @@ ActiveRecord::Schema.define(version: 2020_06_25_175942) do
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.bigint "winner_id"
     t.bigint "match_id"
     t.integer "rule", null: false
+    t.integer "games_rule", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["match_id"], name: "index_games_on_match_id"
-    t.index ["winner_id"], name: "index_games_on_winner_id"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -36,12 +35,13 @@ ActiveRecord::Schema.define(version: 2020_06_25_175942) do
   create_table "team_teamables", force: :cascade do |t|
     t.string "teamable_type", null: false
     t.bigint "teamable_id", null: false
-    t.bigint "teams_id", null: false
-    t.integer "score"
+    t.bigint "team_id", null: false
+    t.integer "score", default: 0
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_team_teamables_on_team_id"
     t.index ["teamable_type", "teamable_id"], name: "index_team_teamables_on_teamable_type_and_teamable_id"
-    t.index ["teams_id"], name: "index_team_teamables_on_teams_id"
   end
 
   create_table "team_users", force: :cascade do |t|
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 2020_06_25_175942) do
   end
 
   add_foreign_key "games", "matches"
-  add_foreign_key "games", "teams", column: "winner_id"
   add_foreign_key "matches", "teams", column: "winner_id"
   add_foreign_key "team_users", "teams"
   add_foreign_key "team_users", "users"

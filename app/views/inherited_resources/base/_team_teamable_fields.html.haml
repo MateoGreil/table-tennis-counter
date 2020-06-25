@@ -1,0 +1,4 @@
+.card-body
+  = f.input :score
+  = f.simple_fields_for :team do |team_form|
+    = render 'team_fields', f: team_form

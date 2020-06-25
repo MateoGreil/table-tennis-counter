@@ -32,4 +32,5 @@ class User < ApplicationRecord
   has_many :team_users
   has_many :teams, through: :team_users
   has_many :games, through: :teams
+  has_many :matches, through: :teams
 end

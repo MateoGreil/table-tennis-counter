@@ -8,6 +8,8 @@ class Ability
 
     # Games
     can %i[new create show index], Game
-    can %i[update destroy], Game
+    can %i[edit update destroy], Game do |game|
+      !game.team_teamables.pluck(:status).include?('winner')
+    end
   end
 end

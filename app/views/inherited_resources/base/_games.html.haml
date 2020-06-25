@@ -14,9 +14,11 @@
       %tr
         %th= render 'game_links', game: game
         %th= game.rule
-        %th{class: game.t_one_status}= game.t_one.users.pluck(:login).join(' & ')
-        %th{class: game.t_one_status}= game.t_one_score 
-        %th{class: game.t_two_status}= game.t_two_score 
-        %th{class: game.t_two_status}= game.t_two.users.pluck(:login).join(' & ') 
+        - team_teamable = game.team_teamables.first
+        %th{class: team_teamable.status}= team_teamable.users.pluck(:login).join(' & ')
+        %th{class: team_teamable.status}= team_teamable.score 
+        - team_teamable = game.team_teamables.second
+        %th{class: team_teamable.status}= team_teamable.score 
+        %th{class: team_teamable.status}= team_teamable.users.pluck(:login).join(' & ') 
         %th= link_to game.match.id, match_path(game.match) if game.match
         %th= game.created_at

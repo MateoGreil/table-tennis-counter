@@ -6,18 +6,17 @@
 # rule                    :integer            not null
 class Match < ApplicationRecord
   enum rule: %i[3 5]
-  enum status: %i[looser winner in_progress]
+  enum games_rule: Game.rules.keys
 
   has_many :games, dependent: :destroy
-  belongs_to :t_one, class_name: 'Team', dependent: :destroy
-  belongs_to :t_two, class_name: 'Team', dependent: :destroy
-  has_many :team_users, through: %i[t_one t_two]
-  has_many :users, through: :team_users
+  has_many :team_teamables, as: :teamable, dependent: :destroy
+  has_many :teams, through: :team_teamables
+  has_many :users, through: :teams
 
-  accepts_nested_attributes_for :t_one, :t_two
-  accepts_nested_attributes_for :games, allow_destroy: true
+  accepts_nested_attributes_for :team_teamables
+  accepts_nested_attributes_for :games
 
-  before_save :set_winner
+  after_save :set_winner
   before_validation :set_games_attributes
   after_touch -> { set_winner; save }
 

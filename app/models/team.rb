@@ -7,6 +7,9 @@
 class Team < ApplicationRecord
   has_many :team_users, dependent: :destroy
   has_many :users, through: :team_users
+  has_many :team_teamables
+  has_many :games, as: :teamable, through: :team_teamables
+  has_many :matches, as: :teamable, through: :team_teamables
 
   accepts_nested_attributes_for :team_users
 

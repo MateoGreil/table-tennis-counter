@@ -2,13 +2,10 @@ class MatchesController < InheritedResources::Base
 
   def new
     resource ||= build_resource
-    resource.t_one ||= Team.new
-    resource.t_two ||= Team.new
-    super
-  end
-
-  def edit
-    resource.games_rule ||= resource.games.first&.rule
+    resource.team_teamables.build while resource.team_teamables.length < 2
+    resource.team_teamables.each do |team_teamable|
+      team_teamable.team = Team.new
+    end
     super
   end
 
@@ -18,30 +15,25 @@ class MatchesController < InheritedResources::Base
     params.require(:match).permit(
       :rule,
       :winner,
-      :t_one_score,
-      :t_two_score,
-      :games_rule,
-      t_one_attributes: [
+      team_teamables_attributes: [
         :id,
-        team_users_attributes: [
-          :_destroy,
+        :score,
+        team_attributes: [
           :id,
-          :user_id
-        ]
-      ],
-      t_two_attributes: [
-        :id,
-        team_users_attributes: [
-          :_destroy,
-          :id,
-          :user_id
+          team_users_attributes: [
+            :_destroy,
+            :id,
+            :user_id
+          ]
         ]
       ],
       games_attributes: [
         :_destroy,
         :id,
-        :t_one_score,
-        :t_two_score
+        team_teamables_attributes: [
+          :id,
+          :score
+        ]
       ]
     )
   end
