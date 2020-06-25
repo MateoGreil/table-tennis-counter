@@ -1,6 +1,7 @@
 # == Table: games
-# match :references
-#
+# match   :references
+# winner  references: :teams
+# rule    :integer            not null
 class Game < ApplicationRecord
   enum rule: %i[11 21]
 
@@ -8,8 +9,7 @@ class Game < ApplicationRecord
 
   belongs_to :t_one, class_name: 'Team'
   belongs_to :t_two, class_name: 'Team'
-  has_many :team_users, through: %i[t_one t_two]
-  has_many :users, through: :team_users
+  has_many :users, through: %i[t_one t_two]
 
   accepts_nested_attributes_for :t_one, :t_two
 

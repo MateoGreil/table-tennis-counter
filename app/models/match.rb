@@ -2,11 +2,7 @@
 
 # == Table: matches
 #
-# winner                  :boolean
-# t_one                   references: :teams
-# t_two                   references: :teams
-# t_one_score             :integer
-# t_two_score             :integer
+# winner                  references: :teams
 # rule                    :integer            not null
 class Match < ApplicationRecord
   enum rule: %i[3 5]
@@ -27,25 +23,19 @@ class Match < ApplicationRecord
 
   attr_accessor :games_rule
 
-  # validate :too_much_games?
-
-  # def too_much_games?
-  #   errors.add(:games, :too_much_games) if games.length > rule.to_i && games.first(rule.to_i).
-  # end
-
   def set_winner
     set_score
+    cap_win = rule.to_s == '3' ? 1 : 2
     self.winner = if t_one_score > t_two_score &&
-                     t_one_score + t_two_score - rule.to_i < t_one_score
+                     t_one_score + t_two_score >= rule.to_i - cap_win
                     false
                   elsif t_two_score > t_one_score &&
-                        t_two_score + t_one_score - rule.to_i < t_two_score
+                        t_two_score + t_one_score >= rule.to_i - cap_win
                     true
                   end
   end
 
   def set_score
-    # raise
     self.t_one_score = games.where(winner: false).length
     self.t_two_score = games.where(winner: true).length
   end

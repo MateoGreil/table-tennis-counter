@@ -1,5 +1,6 @@
 class GamesController < InheritedResources::Base
   actions :all, except: :show
+  load_and_authorize_resource
 
   def new
     resource ||= build_resource

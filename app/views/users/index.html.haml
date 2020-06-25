@@ -8,6 +8,7 @@
       %th{:scope => "col"} Matches W
       %th{:scope => "col"} Matches L
       %th{:scope => "col"} Matches W/L
+      %th{:scope => "col"} teams
   %tbody
     - @collection.each do |user|
       %tr
@@ -18,3 +19,4 @@
         %th= user['matches_w']
         %th= user['matches_l']
         %th= user['matches_w_l']
+        %th= user['teams']
