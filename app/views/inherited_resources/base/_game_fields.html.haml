@@ -1,5 +1,9 @@
 .nested-fields
-  = f.hidden_field :_destroy
-  = f.simple_fields_for :team_teamables do |tt_form|
-    = f.input :score
+  .row
+    .col-sm.card.m-3.card
+      .card-body
+        = f.input :first_team_points
+    .col-sm.card.m-3.card
+      .card-body
+        = f.input :second_team_points
   = link_to :remove, '', class: 'remove_fields'

@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 2020_06_26_042716) do
     t.bigint "first_team_id", null: false
     t.bigint "second_team_id", null: false
     t.bigint "winner_id"
-    t.integer "first_team_points"
-    t.integer "second_team_points"
+    t.integer "first_team_points", default: 0
+    t.integer "second_team_points", default: 0
     t.integer "rule", null: false
     t.integer "games_rule", null: false
     t.datetime "created_at", precision: 6, null: false

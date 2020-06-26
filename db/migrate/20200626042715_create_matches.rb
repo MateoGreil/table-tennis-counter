@@ -4,8 +4,8 @@ class CreateMatches < ActiveRecord::Migration[6.0]
       t.references :first_team, null: false, foreign_key: { to_table: :teams }
       t.references :second_team, null: false, foreign_key: { to_table: :teams }
       t.references :winner, null: true, foreign_key: { to_table: :teams }
-      t.integer :first_team_points
-      t.integer :second_team_points
+      t.integer :first_team_points, default: 0
+      t.integer :second_team_points, default: 0
       t.integer :rule, null: false
       t.integer :games_rule, null: false
 

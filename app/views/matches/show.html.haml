@@ -1,5 +1,5 @@
 = link_to :edit, edit_match_path(resource)
 %center.h5 Rule : #{resource.rule}
-%center.h5 Teams : #{resource.t_one.users.pluck(:login).join(' & ')} VS #{resource.t_two.users.pluck(:login).join(' & ')}
+%center.h5 Teams : #{resource.first_team.users.pluck(:login).join(' & ')} VS #{resource.second_team.users.pluck(:login).join(' & ')}
 %center.h3 Games
 = render 'games', games: resource.games

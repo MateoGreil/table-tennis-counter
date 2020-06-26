@@ -13,8 +13,8 @@
       %tr
         %th= render 'match_links', match: match
         %th= match.rule
-        %th{class: match.t_one_status}= match.t_one.users.pluck(:login).join(' & ')
-        %th{class: match.t_one_status}= match.t_one_score 
-        %th{class: match.t_two_status}= match.t_two_score 
-        %th{class: match.t_two_status}= match.t_two.users.pluck(:login).join(' & ') 
+        %th{class: match.first_team_status}= match.first_team.users.pluck(:login).join(' & ')
+        %th{class: match.first_team_status}= match.first_team_points 
+        %th{class: match.second_team_status}= match.second_team_points
+        %th{class: match.second_team_status}= match.second_team.users.pluck(:login).join(' & ') 
         %th= match.created_at
