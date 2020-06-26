@@ -7,7 +7,7 @@
   %tbody
     - @collection.each do |user|
       %tr
-        %th= user['login']
+        %th= link_to user['login'], user_path(user['login'])
         %th= user['games_w']
         %th= user['games_l']
         %th= user['games_w_l']

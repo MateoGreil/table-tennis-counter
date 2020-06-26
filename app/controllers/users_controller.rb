@@ -47,4 +47,10 @@ class UsersController < InheritedResources::Base
       SQL
     )
   end
+
+  private
+
+  def resource
+    User.friendly.find(params[:id])
+  end
 end

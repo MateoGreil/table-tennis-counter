@@ -37,6 +37,7 @@ gem 'bootstrap', '~> 4.5'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 
+gem 'friendly_id', '~> 5.1'
 # Forms
 gem 'simple_form', '~> 5.0', '>= 5.0.2'
 
