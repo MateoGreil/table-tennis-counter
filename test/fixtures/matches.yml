@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_team: one
+  second_team: one
+  winner: one
+  first_team_points: 1
+  second_team_points: 1
+  rule: 1
+  games_rule: 1
+
+two:
+  first_team: two
+  second_team: two
+  winner: two
+  first_team_points: 1
+  second_team_points: 1
+  rule: 1
+  games_rule: 1

@@ -6,10 +6,6 @@ class Ability
   def initialize(user)
     return if user.nil?
 
-    # Games
-    can %i[new create show index], Game
-    can %i[edit update destroy], Game do |game|
-      !game.team_teamables.pluck(:status).include?('winner')
-    end
+    can :manage, :all
   end
 end

@@ -4,10 +4,8 @@ class GamesController < InheritedResources::Base
 
   def new
     resource ||= build_resource
-    resource.team_teamables.build while resource.team_teamables.length < 2
-    resource.team_teamables.each do |team_teamable|
-      team_teamable.team = Team.new
-    end
+    resource.first_team.build if resource.second_team.nil?
+    resource.second_team.build if resource.second_team.nil?
     super
   end
 
@@ -15,20 +13,6 @@ class GamesController < InheritedResources::Base
 
   def game_params
     params.require(:game).permit(
-      :rule,
-      :winner,
-      team_teamables_attributes: [
-        :id,
-        :score,
-        team_attributes: [
-          :id,
-          team_users_attributes: [
-            :_destroy,
-            :id,
-            :user_id
-          ]
-        ]
-      ]
     )
   end
 end
