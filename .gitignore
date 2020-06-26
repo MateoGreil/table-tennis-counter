@@ -36,3 +36,5 @@ api_bundle
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+tags
