@@ -10,10 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_222323) do
+ActiveRecord::Schema.define(version: 2020_06_26_042716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "games", force: :cascade do |t|
+    t.integer "rule", null: false
+    t.bigint "first_team_id", null: false
+    t.bigint "second_team_id", null: false
+    t.bigint "winner_id"
+    t.integer "first_team_points", default: 0, null: false
+    t.integer "second_team_points", default: 0, null: false
+    t.bigint "match_id"
+    t.integer "round"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["first_team_id"], name: "index_games_on_first_team_id"
+    t.index ["match_id"], name: "index_games_on_match_id"
+    t.index ["second_team_id"], name: "index_games_on_second_team_id"
+    t.index ["winner_id"], name: "index_games_on_winner_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.bigint "first_team_id", null: false
+    t.bigint "second_team_id", null: false
+    t.bigint "winner_id"
+    t.integer "first_team_points"
+    t.integer "second_team_points"
+    t.integer "rule", null: false
+    t.integer "games_rule", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["first_team_id"], name: "index_matches_on_first_team_id"
+    t.index ["second_team_id"], name: "index_matches_on_second_team_id"
+    t.index ["winner_id"], name: "index_matches_on_winner_id"
+  end
+
+  create_table "team_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_team_users_on_team_id"
+    t.index ["user_id"], name: "index_team_users_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -44,4 +90,13 @@ ActiveRecord::Schema.define(version: 2020_06_24_222323) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "games", "matches"
+  add_foreign_key "games", "teams", column: "first_team_id"
+  add_foreign_key "games", "teams", column: "second_team_id"
+  add_foreign_key "games", "teams", column: "winner_id"
+  add_foreign_key "matches", "teams", column: "first_team_id"
+  add_foreign_key "matches", "teams", column: "second_team_id"
+  add_foreign_key "matches", "teams", column: "winner_id"
+  add_foreign_key "team_users", "teams"
+  add_foreign_key "team_users", "users"
 end

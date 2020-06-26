@@ -1,4 +1,5 @@
-= f.simple_fields_for :team_users do |team_user_form|
-  = render 'team_user_fields', f: team_user_form
-.links
-  = link_to_add_fields 'add user', f, :team_users
+.card-body
+  = f.simple_fields_for :team_users do |team_user_form|
+    = render 'team_user_fields', f: team_user_form
+  .links
+    = link_to_add_fields :add_user, f, :team_users
