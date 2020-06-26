@@ -1,14 +1,9 @@
 %table.table
   %thead.thead-light
     %tr
-      %th{:scope => "col"} Login
-      %th{:scope => "col"} Games W
-      %th{:scope => "col"} Games L
-      %th{:scope => "col"} Games W/L
-      %th{:scope => "col"} Matches W
-      %th{:scope => "col"} Matches L
-      %th{:scope => "col"} Matches W/L
-      %th{:scope => "col"} Total Points
+      - @collection.fields.each do |order_by|
+        - direction = params[:order_by] == order_by ? (params[:direction] == 'DESC' ? '▼' : '▲') : ''
+        %th= link_to order_by + ' ' + direction, users_path(order_by: order_by, direction: (params[:direction] == 'DESC' ? 'ASC' : 'DESC'))
   %tbody
     - @collection.each do |user|
       %tr
@@ -19,4 +14,5 @@
         %th= user['matches_w']
         %th= user['matches_l']
         %th= user['matches_w_l']
-        %th= user['total_team_points']
+        %th= user['total_points']
+        %th= user['average_points']

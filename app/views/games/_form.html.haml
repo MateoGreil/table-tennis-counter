@@ -1,18 +1,18 @@
-= resource.errors.each { |e| puts e }
-= simple_form_for resource do |f|
-  = f.input :rule, as: :select, collection: Game.rules.keys.to_a
-  %center.h3 Teams
-  #teams.row
-    = f.simple_fields_for :first_team do |team_form|
-      .col-sm.card.m-3= render 'team_fields', f: team_form
-    = f.simple_fields_for :second_team do |team_form|
-      .col-sm.card.m-3= render 'team_fields', f: team_form
-  %center.h3 Points
-  #points.row
-    .col-sm.card.m-3.card
-      .card-body
-        = f.input :first_team_points
-    .col-sm.card.m-3.card
-      .card-body
-        = f.input :second_team_points
-  = f.submit
+.container.mt-3
+  = simple_form_for resource do |f|
+    = f.input :rule, as: :select, collection: Game.rules.keys.to_a
+    %center.h3 Teams
+    #teams.row
+      = f.simple_fields_for :first_team do |team_form|
+        .col-sm.card.m-3= render 'team_fields', f: team_form
+      = f.simple_fields_for :second_team do |team_form|
+        .col-sm.card.m-3= render 'team_fields', f: team_form
+    %center.h3 Points
+    #points.row
+      .col-sm.card.m-3.card
+        .card-body
+          = f.input :first_team_points
+      .col-sm.card.m-3.card
+        .card-body
+          = f.input :second_team_points
+    = f.submit
