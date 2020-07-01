@@ -1,4 +1,5 @@
 class MatchesController < InheritedResources::Base
+  load_and_authorize_resource
 
   def new
     resource ||= build_resource

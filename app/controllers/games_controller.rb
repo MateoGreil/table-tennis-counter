@@ -1,6 +1,8 @@
 class GamesController < InheritedResources::Base
   actions :all, except: :show
+  belongs_to :user, optional: true, finder: :find_by_slug, param: :user_slug
   load_and_authorize_resource
+
 
   def new
     resource ||= build_resource
@@ -10,6 +12,14 @@ class GamesController < InheritedResources::Base
   end
 
   private
+
+  def collection
+    if parent?
+      resource.games
+    else
+      super
+    end
+  end
 
   def game_params
     params.require(:game).permit(

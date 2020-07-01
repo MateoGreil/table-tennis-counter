@@ -1,0 +1,13 @@
+= resource.login
+%br
+- @enemy.each do |user|
+  game id:
+  = user['games_ids']
+  %br
+  team id :
+  = user['teams_ids']
+  %br
+  enemy team:
+  = user['enemy_teams_ids']
+  %br
+  %br

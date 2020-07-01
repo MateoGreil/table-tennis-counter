@@ -1,4 +1,5 @@
 class UsersController < InheritedResources::Base
+  load_and_authorize_resource
   actions :all, except: :index
 
   PARAMS_ORDER_BY = %w[login games_w games_l games_w_l matches_w matches_l
@@ -32,25 +33,34 @@ class UsersController < InheritedResources::Base
           ON (games_l.first_team_id = teams.id 
           OR games_l.second_team_id = teams.id)
           AND games_l.winner_id != teams.id
+          AND games_l.winner_id IS NOT NULL
         LEFT OUTER JOIN matches AS matches_w
           ON matches_w.winner_id = teams.id
         LEFT OUTER JOIN matches AS matches_l
           ON (matches_l.first_team_id = teams.id 
           OR matches_l.second_team_id = teams.id)
           AND matches_l.winner_id != teams.id
+          AND matches_l.winner_id IS NOT NULL
         LEFT OUTER JOIN games AS games_f
           ON games_f.first_team_id = teams.id
+          AND games_f.winner_id IS NOT NULL
         LEFT OUTER JOIN games AS games_s
           ON games_s.second_team_id = teams.id
+          AND games_s.winner_id IS NOT NULL
         GROUP BY users.id
         #{order_by ? 'ORDER BY ' + order_by + ' ' + direction : ''};
       SQL
     )
   end
 
+  def show
+    super
+  end
+
   private
 
   def resource
-    User.friendly.find(params[:id])
+    @user ||= end_of_association_chain.find_by_slug!(params[:slug])
   end
+
 end

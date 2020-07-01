@@ -1,23 +1,25 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  %a.navbar-brand{:href => "/"} PingPongScoring
+  -# %a.navbar-brand{:href => "/"} PingPongScoring
+  = image_tag 'logo.png', alt: 'SuperScorer', height: 50
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
-  #navbarSupportedContent.collapse.navbar-collapse
-    %ul.navbar-nav.mr-auto
-      %li.nav-item
-        %a.nav-link{:href => users_path} Users
-      %li.nav-item.dropdown
-        %a#gamesDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :role => "button"}
-          Games
-        .dropdown-menu{"aria-labelledby" => "gamesDropdown"}
-          %a.dropdown-item{:href => games_path} Index
-          %a.dropdown-item{:href => new_game_path} Create
-      %li.nav-item.dropdown
-        %a#matchesDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :role => "button"}
-          Matches
-        .dropdown-menu{"aria-labelledby" => "matchesDropdown"}
-          %a.dropdown-item{:href => matches_path} Index
-          %a.dropdown-item{:href => new_match_path} Create
+  - unless current_user.nil?
+    #navbarSupportedContent.collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto
+        %li.nav-item
+          %a.nav-link{:href => users_path} Users
+        %li.nav-item.dropdown
+          %a#gamesDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :role => "button"}
+            Games
+          .dropdown-menu{"aria-labelledby" => "gamesDropdown"}
+            %a.dropdown-item{:href => games_path} Index
+            %a.dropdown-item{:href => new_game_path} Create
+        %li.nav-item.dropdown
+          %a#matchesDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :role => "button"}
+            Matches
+          .dropdown-menu{"aria-labelledby" => "matchesDropdown"}
+            %a.dropdown-item{:href => matches_path} Index
+            %a.dropdown-item{:href => new_match_path} Create
     -# %form.form-inline.my-2.my-lg-0
     -#   %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
     -#   %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
