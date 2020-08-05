@@ -1,10 +1,10 @@
-version: '3.7'
+version: '3.3'
 
 services:
   web:
     build:
       context: .
-      dockerfile: ./docker/development/web/Dockerfile
+      dockerfile: ./docker/production/web/Dockerfile
     ports:
       - 3000:3000
     volumes:
@@ -12,14 +12,12 @@ services:
       - web_bundle:/usr/local/bundle
     depends_on:
       - psql
-    entrypoint:
-      - bash
-      - -c
-      - rm -f /app/tmp/pids/server.pid && yarn install --check-files && bundle install && rails s -b 0.0.0.0
+    command: ./docker/production/web/command.sh
   psql:
     image: postgres
     environment:
       POSTGRES_PASSWORD: password
+      POSTGRES_DB: pingpong_production
     volumes:
       - psql_data:/var/lib/postgresql/data
 volumes:

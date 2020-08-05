@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
-  database: eukaryotapi_production
-  username: eukaryotapi
-  password: <%= ENV['EUKARYOTAPI_DATABASE_PASSWORD'] %>
+  database: pingpong_production
+  username: postgres
+  password: password
+  host: psql
