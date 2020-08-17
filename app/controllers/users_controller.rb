@@ -21,8 +21,8 @@ class UsersController < InheritedResources::Base
           round(COUNT(DISTINCT games_w)::decimal / NULLIF(COUNT(DISTINCT games_l) + COUNT(DISTINCT games_w), 0)) AS games_w_l,
           COUNT(DISTINCT matches_w) AS matches_w,
           COUNT(DISTINCT matches_l) AS matches_l,
-          round(COUNT(DISTINCT matches_w)::decimal / (NULLIF(COUNT(DISTINCT matches_l), 0)), 3) AS matches_w_l,
-          SUM(COALESCE(games_f.first_team_points, 0) + COALESCE(games_s.second_team_points, 0)) AS total_points,
+          round(COUNT(DISTINCT matches_w)::decimal / (NULLIF(COUNT(DISTINCT matches_l) + COUNT(DISTINCT matches_w), 0)), 3) AS matches_w_l,
+          COALESCE(SUM(DISTINCT games_f.first_team_points), 0) + COALESCE(SUM(DISTINCT games_s.second_team_points), 0) AS total_points,
           round(AVG(COALESCE(games_f.first_team_points, 0) + COALESCE(games_s.second_team_points, 0)), 3) AS average_points
         FROM users
         LEFT OUTER JOIN team_users ON team_users.user_id = users.id
