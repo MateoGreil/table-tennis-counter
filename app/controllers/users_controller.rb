@@ -16,8 +16,8 @@ class UsersController < InheritedResources::Base
     @collection = ActiveRecord::Base.connection.execute(
       <<-SQL
         SELECT login,
-          COUNT(games_w) AS games_w,
-          COUNT(games_l) AS games_l,
+          COUNT(DISTINCT games_w) AS games_w,
+          COUNT(DISTINCT games_l) AS games_l,
           round(COUNT(games_w)::decimal / (NULLIF(COUNT(games_l), 0)), 3) AS games_w_l,
           COUNT(DISTINCT matches_w) AS matches_w,
           COUNT(DISTINCT matches_l) AS matches_l,
@@ -55,6 +55,7 @@ class UsersController < InheritedResources::Base
 
   def show
     super
+    @enemy = []
   end
 
   private

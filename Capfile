@@ -30,6 +30,8 @@ require 'capistrano/rvm'
 require 'capistrano/rails'
 require 'capistrano/puma'
 require 'capistrano/puma/nginx'
+install_plugin Capistrano::Puma  # Default puma tasks
+install_plugin Capistrano::Puma::Nginx  # if you want to upload a nginx site template
 # require "capistrano/rbenv"
 # require "capistrano/chruby"
 # require "capistrano/bundler"
