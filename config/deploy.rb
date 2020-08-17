@@ -1,8 +1,8 @@
 # Change these
-server 'pingpong.greil.fr', port: 7171, roles: [:web, :app, :db], primary: true
+server 'pingpong.greil.fr', port: 22, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@github.com:mateogreil/tennis-table-counter.git'
-set :application,     'TennisTableCounter'
+set :repo_url,        'git@github.com:MateoGreil/table-tennis-counter.git'
+set :application,     'TableTennisCounter'
 set :user,            'ubuntu'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
@@ -31,7 +31,7 @@ set :puma_init_active_record, false  # Change to true if using ActiveRecord
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-# set :linked_files, %w{config/database.yml}
+# set :linked_files, %w{config/database.yml config/credentials.yml.enc}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do
@@ -42,8 +42,6 @@ namespace :puma do
       execute "mkdir #{shared_path}/tmp/pids -p"
     end
   end
-
-  before :start, :make_dirs
 end
 
 namespace :deploy do
