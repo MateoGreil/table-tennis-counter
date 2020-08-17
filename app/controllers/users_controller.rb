@@ -18,7 +18,7 @@ class UsersController < InheritedResources::Base
         SELECT login,
           COUNT(DISTINCT games_w) AS games_w,
           COUNT(DISTINCT games_l) AS games_l,
-          round(COUNT(games_w)::decimal / (NULLIF(COUNT(games_l), 0)), 3) AS games_w_l,
+          round(COUNT(DISTINCT games_w)::decimal / NULLIF(COUNT(DISTINCT games_l) + COUNT(DISTINCT games_w), 0)) AS games_w_l,
           COUNT(DISTINCT matches_w) AS matches_w,
           COUNT(DISTINCT matches_l) AS matches_l,
           round(COUNT(DISTINCT matches_w)::decimal / (NULLIF(COUNT(DISTINCT matches_l), 0)), 3) AS matches_w_l,

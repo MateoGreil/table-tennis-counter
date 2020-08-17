@@ -6,7 +6,7 @@
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
-server 'pingpong.greil.fr', user: 'ubuntu', roles: %w{app web db}, ssh_options: { forward_agent: true }
+server 'beta.pingpong.greil.fr', user: 'ubuntu', roles: %w{app web db}, ssh_options: { forward_agent: true }
 
 
 
