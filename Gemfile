@@ -51,6 +51,8 @@ end
 group :development do
   gem "capistrano", "~> 3.10", require: false
   gem "capistrano-rails", "~> 1.3", require: false
+  gem 'capistrano-rvm'
+  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
 
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
