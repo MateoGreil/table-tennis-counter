@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :games, except: :show
+  get :rivalry, to: 'users#rivalry'
   resources :users, only: %i[index show], param: :slug do
     resources :games, except: :show
     resources :matchs

@@ -6,7 +6,7 @@ class Ability
   def initialize(user)
     return if user.nil?
 
-    can %i[show index], User
+    can %i[show index rivalry], User
     can %i[index create], Game
     can %i[index show create], Match
 

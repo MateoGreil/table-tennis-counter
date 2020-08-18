@@ -1,0 +1,25 @@
+%center.h5 Rivals : #{@first_user.login} & #{@second_user.login}
+%center.h5 Matches wins : #{@first_user_games_wins} & #{@second_user_games_wins}
+
+%table.table
+  %thead.thead-light
+    %tr
+      %th{:scope => "col"}
+      %th{:scope => "col"} Rule
+      %th{:scope => "col"} Team 1
+      %th{:scope => "col"} Score 1
+      %th{:scope => "col"} Score 2
+      %th{:scope => "col"} Team 2
+      %th Match
+      %th Created at
+  %tbody
+    - @games.each do |game|
+      %tr
+        %th= render 'game_links', game: game
+        %th= game.rule
+        %th{class: game.first_team_status}= render 'team_users_links', users: game.first_team.users
+        %th{class: game.first_team_status}= game.first_team_points
+        %th{class: game.second_team_status}= game.second_team_points 
+        %th{class: game.second_team_status}= render 'team_users_links', users: game.second_team.users
+        %th= link_to game.match.id, match_path(game.match) if game.match
+        %th= game.created_at

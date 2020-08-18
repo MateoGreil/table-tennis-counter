@@ -23,6 +23,7 @@
 # role                    :integer
 # created_at              :datetime   not null
 # updated_at              :datetime   not null
+
 class User < ApplicationRecord
   extend FriendlyId
   friendly_id :login, use: :slugged

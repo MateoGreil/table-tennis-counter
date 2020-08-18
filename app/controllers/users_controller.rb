@@ -58,6 +58,14 @@ class UsersController < InheritedResources::Base
     @enemy = []
   end
 
+  def rivalry
+    @first_user = User.find_by(slug: params[:user1])
+    @second_user = User.find_by(slug: params[:user2])
+    @games = Game.where(id: Game.from_user(@first_user)).where(id: Game.from_user(@second_user))
+    @first_user_games_wins = @games.from_winner(@first_user).count
+    @second_user_games_wins = @games.from_winner(@second_user).count
+  end
+
   private
 
   def resource

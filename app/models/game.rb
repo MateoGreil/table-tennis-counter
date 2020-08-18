@@ -14,13 +14,31 @@ class Game < ApplicationRecord
   belongs_to :winner, class_name: 'Team', optional: true
   belongs_to :match, optional: true
 
-
   accepts_nested_attributes_for :first_team, :second_team
 
   validate :impossible_points?
   validate :team_users_validations
 
   before_save :set_winner, if: :there_is_a_winner?
+
+  scope :from_user, -> (user) {
+    joins(%{
+      INNER JOIN teams
+        ON teams.id = games.first_team_id
+        OR teams.id = games.second_team_id
+      INNER JOIN team_users
+        ON team_users.team_id = teams.id
+    }).where(team_users: {user_id: user.id})
+  }
+
+  scope :from_winner, -> (user) {
+    joins(%{
+      INNER JOIN teams
+        ON teams.id = games.winner_id
+      INNER JOIN team_users
+        ON team_users.team_id = teams.id
+    }).where(team_users: {user_id: user.id})
+  }
 
   def first_team_status
     if winner.nil?
